@@ -245,15 +245,12 @@ sub WS {
     my $self   = shift;
     my $struct = shift;
     
-    my $ua = Mojo::UserAgent->new;
-
     my $message = '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:mrw="http://www.mrw.es/">';
 
     $message .= $self->AuthInfo();
     $message .= $struct;
 
     my $XML = $self->Post($message);
-    #my $XML = XMLin( $ua->post( $self->{mrw}->{WSDL} => {'Content-Type' => 'text/xml' } => $message)->res->body );
 
     my $Info;
     
