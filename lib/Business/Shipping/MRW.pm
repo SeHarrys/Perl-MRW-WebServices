@@ -20,11 +20,11 @@ use feature 'say';
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
     
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -56,11 +56,29 @@ sub new {
     
     map { $self->{mrw}->{$_} = $config->{$_} } keys %{ $config };
 
+    $self->{errors} = [];
+    
     $self = bless $self, $class;
 
     return $self;
 }
 
+=head2
+
+=cut
+sub Error {
+    my $self = shift;
+    my $msg  = shift;
+    
+    push @{$self->{errors}} , $msg;
+}
+
+sub Errors {
+    my $self = shift;
+
+    print Dumper $self->{errors};
+}
+    
 =head2
     Open JSON File
 =cut
@@ -127,7 +145,7 @@ sub CodigoServicio {
     map { $ret = $_ if $codes->{$_} eq $tipo } keys %{$codes};
     
     unless ( $ret ) {
-	#say "CodigoServicio no valido : $tipo";
+	$self->Error("CodigoServicio no valido : $tipo , fijado 0200");
 	return '0200';
     }
     
@@ -224,7 +242,7 @@ sub TransmEnvio {
 	    'ValorEstadistico'      => '',
 	    'Asistente'             => '',
 	    'Gestion'               => '',
-	    'CodigoServicio'        => $self->CodigoServicio('Urgente 19'),
+	    'CodigoServicio'        => $self->CodigoServicio( $Envio->{DatosServicio}->{CodigoServicio} ),
 	    'PortesDebidos'         => '',
 	},
     };
@@ -310,7 +328,9 @@ sub WS {
 	$Info->{$K} = $XML->{'soap:Body'}->{'TransmEnvioResponse'}->{'TransmEnvioResult'}->{$K};
     }
     
-     $Info->{UrlPanel} = qq{$self->{mrw}->{Panel}?Franq=$self->{mrw}->{CodigoFranquicia}&Ab=$self->{mrw}->{CodigoAbonado}&Dep=&Pwd=$self->{mrw}->{Password}&Usr=$self->{mrw}->{UserName}&NumEnv=$Info->{NumeroEnvio}};
+    $Info->{UrlPanel} = qq{$self->{mrw}->{Panel}?Franq=$self->{mrw}->{CodigoFranquicia}&Ab=$self->{mrw}->{CodigoAbonado}&Dep=&Pwd=$self->{mrw}->{Password}&Usr=$self->{mrw}->{UserName}&NumEnv=$Info->{NumeroEnvio}};
+
+    $self->Error($Info->{Mensaje}) if $Info->{Mensaje};
     
     return $Info;
 }
@@ -406,15 +426,11 @@ Please report any bugs or feature requests to C<bug-business-shipping-mrw at rt.
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Business-Shipping-MRW>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
-
-
-
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Business::Shipping::MRW
-
+perldoc Business::Shipping::MRW
 
 You can also look for information at:
 
