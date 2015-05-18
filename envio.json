@@ -1,0 +1,45 @@
+{
+    "DatosServicio" : {
+	"EntregaSabado" : "N",
+	"Reembolso" : "O",
+	"Referencia" : "REF-PEDIDO",
+	"ImporteReembolso" : "59,70",
+	"NumeroBultos" : 3,
+	"Retorno" : "N",
+	"Notificaciones" : {
+	    "MailSMS" : "info@djmania.es",
+	    "TipoNotificacion" : "2",
+	    "CanalNotificacion" : "1"
+	},
+	"Bultos" : {
+	    "1" : {
+		"Peso" : 5,
+		"Referencia" : "Paquete 1"
+	    },
+	    "2" : {
+		"Peso" : 5,
+		"Referencia" : "Paquete 2"
+	    },
+	    "3" : {
+		"Peso" : 5,
+		"Referencia" : "Paquete 3"
+	    }
+	},
+	"Peso" : 15
+    },
+    "DatosEntrega" : {
+	"Nif" : "",
+	"Observaciones" : "Colegio",
+	"Nombre" : "Tester Testafero",
+	"ALaAtencionDe" : "",
+	"Direccion" : {
+	    "CodigoPostal" : "18000",
+	    "Poblacion" : "Granada",
+	    "Numero" : "1",
+	    "Via" : "Dolores",
+	    "CodigoTipoVia" : "CL"
+	},
+	"Telefono" : "958000000",
+	"Contacto" : "Conserje"
+    }
+}
