@@ -18,8 +18,19 @@ WriteMakefile(
         'Test::More' => 0,
     },
     PREREQ_PM => {
-        #'ABC'              => 1.6,
-        #'Foo::Bar::Module' => 5.0401,
+        'JSON::XS'     => 2.34,
+        'MIME::Base64' => 3.10,
+	'XML::Simple'  => 2.20,
+    },
+    META_MERGE => {
+	'meta-spec' => { version => 2 },
+	resources => {
+	    repository => {
+		type => 'git',
+		url  => 'https://github.com/SeHarrys/Perl-MRW-WebServices.git',
+		web  => 'https://github.com/SeHarrys/Perl-MRW-WebServices',
+	    },
+	},
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Business-Shipping-MRW-*' },
