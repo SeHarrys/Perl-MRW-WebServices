@@ -1,0 +1,9 @@
+{
+    "Password":"",
+    "CodigoFranquicia":"",
+    "RutaPDF":"/tmp/",
+    "Panel":"http://sagec-test.mrw.es/Panel.aspx",
+    "CodigoAbonado":"",
+    "UserName":"",
+    "WSDL":"https://sagec-test.mrw.es/MRWEnvio.asmx"
+}
